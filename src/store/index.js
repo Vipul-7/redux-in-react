@@ -1,31 +1,32 @@
 // import { createStore } from "redux";
-import { createSlice ,configureStore} from "@reduxjs/toolkit";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const intialState = { counter: 0, showCounter: true };
+const initialState = { counter: 0, showCounter: true };
 
-const counterSllice = createSlice({
+const counterSlice = createSlice({
   name: "counter",
-  intialState,
+  initialState,
   reducers: {
-    // Using toolkit we can now mutate the previous state
-    // because react tool kit will handle this, comparing with previous and make changes and then return new
+    
     increment(state) {
       state.counter++;
     },
 
     increase(state, action) {
-      state.counter = state.counter + action.value;
+      state.counter = state.counter + action.payload;
     },
 
     decrement(state) {
-      state.counter++;
+      state.counter--;
     },
 
-    toggle(state) {
+    toggleCounter(state) {
       state.showCounter = !state.showCounter;
     },
-  },
+  }
 });
+// Using toolkit we can now mutate the previous state
+    // because react tool kit will handle this, comparing with previous and make changes and then return new
 
 // const counterReducer = (state = intialState, action) => {
 //   // we can not mutate the previous state every time we have to return new state snapshot
@@ -59,9 +60,9 @@ const counterSllice = createSlice({
 
 // const store = createStore(counterReducer);
 
-
 const store = configureStore({
-  reducer: counterSllice.reducer
-})
+  reducer: counterSlice.reducer,
+});
 
+export const counterActions = counterSlice.actions;
 export default store;
